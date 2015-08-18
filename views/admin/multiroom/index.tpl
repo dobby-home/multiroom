@@ -2,6 +2,8 @@
 {block "content"}
     <h1>Мультирум</h1>
     <a href="/admin/multiroom/add">Добавить комнату</a>
+    <a href="/admin/multiroom/library">Библиотека</a>
+    <a href="/admin/multiroom/library">Библиотека</a>
     <table class="table table-bordered">
         <thead>
         <tr>

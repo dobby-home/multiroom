@@ -22,5 +22,19 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
 
     public function action_test() {
 
+        Multiroom::factory($this->request->post('id'))->test();
+
+    }
+
+    public function action_scan() {
+        Multiroom::send('command=scan');
+    }
+
+    public function action_play() {
+        Multiroom::send('command=play&id=' . $this->request->post('id') . '&channels=' . $this->request->post('channels'));
+    }
+
+    public function action_stop() {
+        Multiroom::send('command=stop&channels=' . $this->request->post('channels'));
     }
 }

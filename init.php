@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-Route::set('admin_multiroom', 'admin/multiroom(/<action>)(/<id>)', array('action' => 'add', 'id' => '[0-9]+'))
+Route::set('admin_multiroom', 'admin/multiroom(/<action>)(/<id>)', array('action' => 'add|library', 'id' => '[0-9]+'))
     ->defaults(array(
         'controller' => 'Multiroom',
         'action' => 'index',
