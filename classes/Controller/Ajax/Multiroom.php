@@ -22,7 +22,9 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
 
     public function action_test() {
 
-        Multiroom::factory($this->request->post('id'))->test();
+        $room =  Multiroom::factory($this->request->post('id'));
+        Multiroom::send('command=say&channels=' . $room->channels . '&text=' . "Это " . $room->name);
+//        Multiroom::factory($this->request->post('id'))->test();
 
     }
 
@@ -36,5 +38,10 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
 
     public function action_stop() {
         Multiroom::send('command=stop&channels=' . $this->request->post('channels'));
+    }
+
+    public function action_say() {
+        Multiroom::send('command=say&channels=' . $this->request->post('channels') . '&text=' . "Погода сегодня прекрасная, За окном плюс 60, ожидается дождь");
+//        Multiroom::send('command=say&channels=' . $this->request->post('channels') . '&text=' . "Пукся");
     }
 }

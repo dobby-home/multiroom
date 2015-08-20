@@ -29,4 +29,13 @@ $(function () {
         $.post('/ajax/multiroom/stop', {channels: channels});
     });
 
+
+
+    $(document).on('click', '.js-multiroom-say', function (e) {
+        e.preventDefault();
+        var channels = $('[name="room"]:checked').map(function () {
+            return $(this).val()
+        }).get().join(',');
+        $.post('/ajax/multiroom/say', {channels: channels});
+    });
 });

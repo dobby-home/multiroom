@@ -3,7 +3,7 @@
     <h1>Библиотека</h1>
     <a href="#" class="js-multiroom-scan">Сканировать</a>
     <a href="#" class="js-multiroom-stop">Остановить</a>
-    {foreach $rooms as $item}
+    <a href="#" class="js-multiroom-say">Сказать</a>{foreach $rooms as $item}
         <label><input type="checkbox" name="room" value="{$item.channels}"> {$item.name}</label>
     {/foreach}
     <table>
