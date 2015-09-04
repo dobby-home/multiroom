@@ -128,6 +128,13 @@ class Multiroom extends Dobby_Module {
     }
 
 
+    public static function getSongsByPlaylist($playlist_id) {
+        return Database::instance()->prepare("SELECT files.* FROM playlists_files JOIN files USING(id_files) WHERE id_playlists=:id")
+            ->bindValue(':id', $playlist_id)
+            ->execute()
+            ->fetchAll();
+    }
+
     public static function getItems() {
 
         return Database::instance()->prepare("SELECT * FROM files ORDER BY clevel, name")->execute()->fetchAll();
