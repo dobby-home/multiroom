@@ -1,14 +1,12 @@
-{extends "admin/template/index.tpl"}
-{block "container"}
-    <div class="container well">
-        <div class="row">
-            <div class="col-md-3">
-                {include "admin/helpers/menu.tpl"}
+{extends "front/pages/index.tpl"}
+{block "content"}
+    <div class="multiroom-rooms">
+        {foreach $rooms as $room}
+            <div class="multiroom-room">
+                <span class="name">{$room.name}</span>
+                <span class="playlist">Плейлист #{$room.playlist.PlaylistId}</span>
+                <span class="current">{$room.playlist.Current}</span>
             </div>
-            <div class="col-md-9">
-                {block "content"}
-                {/block}
-            </div>
-        </div>
+        {/foreach}
     </div>
 {/block}
