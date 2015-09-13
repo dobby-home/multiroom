@@ -1,6 +1,5 @@
 $(function () {
 
-
     $(document).on('click', '.js-multiroom-test', function (e) {
 
         e.preventDefault();
