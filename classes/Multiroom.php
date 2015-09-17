@@ -109,21 +109,26 @@ class Multiroom extends Dobby_Module {
     }
 
     public static function send($message) {
-        if (!self::$config) {
-            self::loadConfig();
-        }
-        self::connect();
-        $result = '';
-        if (self::$socket) {
-            $message .= '&eof=<EOF>';
-            socket_write(self::$socket, $message, strlen($message));
-            $result = "";
-            while ($out = socket_read(self::$socket, 2048)) {
-                $result .= $out;
+        try {
+            if (!self::$config) {
+                self::loadConfig();
             }
+            self::connect();
+            $result = '';
+            if (self::$socket) {
+                $message .= '&eof=<EOF>';
+                socket_write(self::$socket, $message, strlen($message));
+                $result = "";
+                while ($out = socket_read(self::$socket, 2048)) {
+                    $result .= $out;
+                }
 
+            }
+            socket_close(self::$socket);
+        }catch (Exception $e){
+            $result = null;
         }
-        socket_close(self::$socket);
+
         return $result;
     }
 
