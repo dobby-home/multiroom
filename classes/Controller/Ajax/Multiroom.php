@@ -33,11 +33,24 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
     }
 
     public function action_play() {
-        Multiroom::send('command=play&id=' . $this->request->post('id') . '&channels=' . $this->request->post('channels'));
+        if ($this->request->post('channels') !== null) {
+            Multiroom::send('command=play&id=' . $this->request->post('id') . '&channels=' . $this->request->post('channels'));
+        }
+        if ($this->request->post('playlist') !== null) {
+            Multiroom::send('command=play&playlist=' . $this->request->post('playlist'));
+        }
     }
 
     public function action_stop() {
-        Multiroom::send('command=stop&channels=' . $this->request->post('channels'));
+        if ($this->request->post('channels') !== null) {
+            Multiroom::send('command=stop&channels=' . $this->request->post('channels'));
+        }
+        if ($this->request->post('playlist') !== null) {
+            Multiroom::send('command=stop&playlist=' . $this->request->post('playlist'));
+        }
+    }
+    public function action_pause() {
+        Multiroom::send('command=pause&playlist=' . $this->request->post('playlist'));
     }
 
     public function action_say() {
@@ -51,6 +64,18 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
     }
 
     public function action_position() {
-        Multiroom::send('command=position&position=' . round($this->request->post('position'),2) . '&playlist=' . $this->request->post('playlist'));
+        Multiroom::send('command=position&position=' . round($this->request->post('position'), 2) . '&playlist=' . $this->request->post('playlist'));
+    }
+
+    public function action_next() {
+        Multiroom::send('command=next&playlist=' . $this->request->post('playlist'));
+    }
+
+    public function action_prev() {
+        Multiroom::send('command=prev&playlist=' . $this->request->post('playlist'));
+    }
+
+    public function action_volume() {
+        Multiroom::send('command=setvolume&volume=' . round($this->request->post('volume'), 2) . '&channels=' . $this->request->post('channels'));
     }
 }
