@@ -60,7 +60,12 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
 
     public function action_playlists() {
         $result = Multiroom::send('command=getplaylists');
-        echo json_encode($result);
+        echo ($result);
+    }
+
+    public function action_channels() {
+        $result = Multiroom::send('command=getchannels');
+        echo ($result);
     }
 
     public function action_position() {

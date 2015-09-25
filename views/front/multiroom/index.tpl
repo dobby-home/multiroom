@@ -10,6 +10,7 @@
                 </div>
                 <div class="detail">
                     <span class="current js-current-song">{$room.playlist.Current}</span>
+                    <small class="js-current-song-full"></small>
 
                     <div class="tracker js-tracker">
                         <div class="full js-track"
