@@ -23,8 +23,7 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
     public function action_test() {
 
         $room = Multiroom::factory($this->request->post('id'));
-        Multiroom::send('command=say&channels=' . $room->channels . '&text=' . "Это " . $room->name);
-//        Multiroom::factory($this->request->post('id'))->test();
+        Multiroom::send('command=say&channels=' . $room->channels . '&text=' . "Это " . $room->name . '&voice=' . Module::instance(Multiroom::NAME)->getValue('voice'));
 
     }
 
@@ -49,6 +48,7 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
             Multiroom::send('command=stop&playlist=' . $this->request->post('playlist'));
         }
     }
+
     public function action_pause() {
         Multiroom::send('command=pause&playlist=' . $this->request->post('playlist'));
     }
@@ -60,12 +60,12 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
 
     public function action_playlists() {
         $result = Multiroom::send('command=getplaylists');
-        echo ($result);
+        echo($result);
     }
 
     public function action_channels() {
         $result = Multiroom::send('command=getchannels');
-        echo ($result);
+        echo($result);
     }
 
     public function action_position() {
@@ -82,5 +82,9 @@ class Controller_Ajax_Multiroom extends Controller_Ajax {
 
     public function action_volume() {
         Multiroom::send('command=setvolume&volume=' . round($this->request->post('volume'), 2) . '&channels=' . $this->request->post('channels'));
+    }
+
+    public function action_setvoice() {
+        Module::instance(Multiroom::NAME)->setValue('voice', $this->request->post('name'));
     }
 }

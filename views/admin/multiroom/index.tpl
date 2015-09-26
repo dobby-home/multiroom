@@ -24,4 +24,33 @@
         {/foreach}
         </tbody>
     </table>
+    <h3>Доступные голоса на сервере</h3>
+    <table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Culture</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Description</th>
+        <th>Id</th>
+        <th>Enabled</th>
+        <th>Formats</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $voices as $item}
+        <tr{if $voice == $item.Name} style="background:#000" {/if}>
+            <td>{$item.Name}</td>
+            <td>{$item.Culture}</td>
+            <td>{$item.Age}</td>
+            <td>{$item.Gender}</td>
+            <td>{$item.Description}</td>
+            <td>{$item.Id}</td>
+            <td>{$item.Enabled}</td>
+            <td><a href="#" data-name="{$item.Name}" class="js-select-voice">Выбрать голос</a> </td>
+        </tr>
+    {/foreach}
+    </tbody>
+    </table>
 {/block}

@@ -19,6 +19,9 @@ class Controller_Admin_Multiroom extends Controller_Admin {
 
         } else {
             $this->view->items = Module::instance(Multiroom::NAME)->getValues();
+            $result = Multiroom::send('command=getvoices');
+            $this->view->voices = json_decode($result, true);
+            $this->view->voice = Module::instance(Multiroom::NAME)->getValue('voice');
         }
     }
 
@@ -55,20 +58,6 @@ class Controller_Admin_Multiroom extends Controller_Admin {
             $playlists[$key]['songs'] = Multiroom::getSongsByPlaylist($playlist['PlaylistId']);
             $playlists[$key]['Channels'] = explode(",", $playlists[$key]['Channels']);
         }
-
-    /*    foreach ($playlists as $key => $playlist) {
-            $tree = $this->tree_node(array('id_files' => '', 'id_parent' => ''), null); //root node
-            $map = array("" => &$tree);
-            foreach ($playlists[$key]['songs'] as $cur) {
-                $id = $cur['id_files'];
-                $parentId = $cur['id_parent'];
-                $map[$id] =& $map[$parentId]['children'][];
-                $map[$id] = $this->tree_node($cur);
-            }
-            $playlists[$key]['songs'] = $this->flatter($tree);
-            array_shift($playlists[$key]['songs']); //Remove the root node, which was only added as a helper
-        }*/
-
 
         $this->view->playlists = $playlists;
 
